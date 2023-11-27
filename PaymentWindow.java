@@ -80,7 +80,7 @@ public class PaymentWindow extends Application {
 
         // Confirm Payment button
         Button confirmPaymentButton = new Button("Confirm Payment");
-//~~~~~ confirmPaymentButton.setOnAction(event -> confirmPayment()); FIXME: Implement ConfirmPayment
+        confirmPaymentButton.setOnAction(event -> confirmPayment());
 
         // Add components to a VBox
         VBox vbox = new VBox(10);
@@ -93,6 +93,55 @@ public class PaymentWindow extends Application {
 
         // Show the stage
         primaryStage.show();
+    }
+
+    //  Micah Trent
+    private void confirmPayment() {
+        RadioButton selectedRadioButton = (RadioButton) paymentMethodToggleGroup.getSelectedToggle();
+        if (selectedRadioButton != null) {
+            String paymentMethod = selectedRadioButton.getText();
+            String paymentAmountText = paymentAmountField.getText();
+            String confirmationMessage = "";
+            
+            // Validate input for payment amount
+            try {
+                double paymentAmount = Double.parseDouble(paymentAmountText);
+                if (selectedRadioButton == creditCardRadioButton) {
+                    String creditCardNumber = creditCardNumberField.getText();
+                    
+                    if (!(creditCardNumber.length() == 16 && creditCardNumber.matches("\\d+"))) {
+                        confirmationMessage += "\nError: Please enter a valid 16-digit credit card number.";
+                        confirmationTextArea.setText(confirmationMessage);
+                        return;
+                    }
+                } 
+                else if (selectedRadioButton == paypalRadioButton) {
+                    //openPaypalLoginWindow(); //FIXME: This needs to return a value for paypal's payment confirmation!
+                }
+                
+                if (paymentAmount > initialBalance) {
+                    confirmationTextArea.setText("Error: Payment amount exceeds remaining balance.");
+                    return;
+                }
+                initialBalance -= paymentAmount;
+                remainingBalanceLabel.setText("Remaining Balance: $" + formatCurrency(initialBalance));
+
+                confirmationMessage = "Payment Confirmed!" +
+                                        "\n\nSelected Payment Method: " + paymentMethod +
+                                        "\nPayment Amount: $" + formatCurrency(paymentAmount) +
+                                        "\nRemaining Amount Due: $" + formatCurrency(initialBalance) +
+                                        "\n\nTransaction Number: " + transactionNumber;
+                                        
+                transactionNumber += 1;
+                confirmationTextArea.setText(confirmationMessage);
+            } 
+            catch (NumberFormatException e) {
+                confirmationTextArea.setText("Error: Please enter a valid numerical payment amount.");
+            }
+        } 
+        else {
+            confirmationTextArea.setText("Please select a payment method.");
+        }
     }
 
     //Thomas Morton
