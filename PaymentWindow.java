@@ -80,7 +80,7 @@ public class PaymentWindow extends Application {
 
         // Confirm Payment button
         Button confirmPaymentButton = new Button("Confirm Payment");
-        confirmPaymentButton.setOnAction(event -> confirmPayment());
+        confirmPaymentButton.setOnAction(event -> confirmPayment(primaryStage));
 
         // Add components to a VBox
         VBox vbox = new VBox(10);
@@ -96,7 +96,7 @@ public class PaymentWindow extends Application {
     }
 
     //  Micah Trent
-    private void confirmPayment() {
+    private void confirmPayment(Stage primaryStage) {
         RadioButton selectedRadioButton = (RadioButton) paymentMethodToggleGroup.getSelectedToggle();
         if (selectedRadioButton != null) {
             String paymentMethod = selectedRadioButton.getText();
@@ -134,6 +134,12 @@ public class PaymentWindow extends Application {
                                         
                 transactionNumber += 1;
                 confirmationTextArea.setText(confirmationMessage);
+
+                if (initialBalance == 0) {
+                    RatingsMenu menu = new RatingsMenu(); //or RatingMenu menu = new RatingMenu();
+                    menu.start(primaryStage);
+                    
+                }
             } 
             catch (NumberFormatException e) {
                 confirmationTextArea.setText("Error: Please enter a valid numerical payment amount.");
