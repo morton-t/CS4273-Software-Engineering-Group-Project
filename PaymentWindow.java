@@ -116,7 +116,7 @@ public class PaymentWindow extends Application {
                     }
                 } 
                 else if (selectedRadioButton == paypalRadioButton) {
-                    //openPaypalLoginWindow(); //FIXME: This needs to return a value for paypal's payment confirmation!
+                    openPaypalLoginWindow(); //Zach Paden
                 }
                 
                 if (paymentAmount > initialBalance) {
@@ -142,6 +142,24 @@ public class PaymentWindow extends Application {
         else {
             confirmationTextArea.setText("Please select a payment method.");
         }
+    }
+
+    //Zach Paden
+    private void openPaypalLoginWindow() {
+        //Create content for the PayPal login window
+        VBox vbox = new VBox(10);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.getChildren().add(new Label("PayPal Login"));
+    
+        //Create the PayPal login stage
+        Stage paypalLoginStage = new Stage();
+        Scene scene = new Scene(vbox, 200, 100);
+        paypalLoginStage.setScene(scene);
+        paypalLoginStage.setTitle("PayPal Login");
+        paypalLoginStage.initModality(Modality.APPLICATION_MODAL);
+    
+        //Show the PayPal login stage
+        paypalLoginStage.showAndWait();
     }
 
     //Thomas Morton
