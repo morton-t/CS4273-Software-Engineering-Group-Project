@@ -76,6 +76,16 @@ public class RatingsMenu extends Application {
         primaryStage.show();
     }
 
+    //Thomas Morton
+    private Slider createSlider() {
+        Slider slider = new Slider(1, 5, 3); // Min value, max value, default value
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
+        slider.setMajorTickUnit(1);
+        slider.setBlockIncrement(1);
+        return slider;
+    }
+
     //Zach Paden (easy)
     public static void main(String[] args) {
         launch(args);
