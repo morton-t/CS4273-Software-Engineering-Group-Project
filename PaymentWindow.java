@@ -138,7 +138,6 @@ public class PaymentWindow extends Application {
                 if (initialBalance == 0) {
                     RatingsMenu menu = new RatingsMenu(); //or RatingMenu menu = new RatingMenu();
                     menu.start(primaryStage);
-                    
                 }
             } 
             catch (NumberFormatException e) {
