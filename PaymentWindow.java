@@ -135,7 +135,7 @@ public class PaymentWindow extends Application {
                 transactionNumber += 1;
                 confirmationTextArea.setText(confirmationMessage);
 
-                if (initialBalance == 0) {
+                if (initialBalance < 0.00001) {
                     RatingsMenu menu = new RatingsMenu(); //or RatingMenu menu = new RatingMenu();
                     menu.start(primaryStage);
                 }
