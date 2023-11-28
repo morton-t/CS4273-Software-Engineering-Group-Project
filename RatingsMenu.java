@@ -65,4 +65,9 @@ public class RatingsMenu extends Application {
         // Show the stage
         primaryStage.show();
     }
+
+    //Zach Paden (easy)
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
