@@ -31,7 +31,17 @@ public class RatingsMenu extends Application {
         Label speedRatingLabel = new Label("Rating: ");
         Label satisfactionRatingLabel = new Label("Rating: ");
 
-        // --Add slider functionality
+        // Thomas Morton
+        // Sliders for speed and satisfaction ratings
+        Slider speedSlider = createSlider();
+        Slider satisfactionSlider = createSlider();
+
+        // Event handlers for sliders
+        speedSlider.valueProperty().addListener((observable, oldValue, newValue) ->
+                speedRatingLabel.setText("Rating: " + newValue.intValue()));
+
+        satisfactionSlider.valueProperty().addListener((observable, oldValue, newValue) ->
+                satisfactionRatingLabel.setText("Rating: " + newValue.intValue()));
 
         // Add components to the grid pane
         gridPane.add(speedLabel, 0, 0);
